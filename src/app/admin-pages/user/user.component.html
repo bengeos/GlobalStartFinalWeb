@@ -1,0 +1,146 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Administrators</h2>
+    <ol class="breadcrumb">
+      <li class="active">
+        <strong>System Administrators</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>System Administrators </h5>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-5 m-b-xs">
+              <button data-toggle="button" class="btn btn-primary" type="button" (click)="openModal(new_user_modal)">Add New Administrator</button>
+            </div>
+            <div class="col-sm-4 m-b-xs">
+            </div>
+            <div class="col-sm-3">
+              <form (ngSubmit)="getPaginatedSearch()">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button type="button" (click)="updateUsersComponent()" class="btn btn-sm btn-white"> እንደገና | Refresh</button>
+                  </span>
+                  <input type="text" placeholder="ፈልግ | Search" class="input-sm form-control">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-sm btn-primary"> ፈልግ | Go!</button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>No.</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>User Role</th>
+                <th> Account Status</th>
+                <th>የታደሰበት ቀን</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user_data of paginated_users_list.data; let i = index">
+                <td>{{i + 1}}</td>
+                <td><strong>{{user_data.full_name}}</strong></td>
+                <td>{{user_data.email}}</td>
+                <td>{{user_data.user_role.role_name}}</td>
+                <td>
+                  <a (click)="onEditUser(user_data); updateUserStatus()" *ngIf="user_data.account_status"><i class="fa fa-check text-navy"> Active</i></a>
+                  <a (click)="onEditUser(user_data); updateUserStatus()" *ngIf="!user_data.account_status"><i class="fa fa-times text-navy"> InActive</i> </a>
+                </td>
+                <td>{{user_data.updated_at}}</td>
+                <td>
+                  <a (click)="onEditUser(user_data); openModal(update_user_modal);" class="btn btn-white btn-sm"><i class="fa fa-edit"></i> Edit </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="btn-group pull-right">
+              <button *ngIf="paginated_users_list.first_page_url" type="button" class="btn btn-white" (click)="getPaginatedUser(paginated_users_list.first_page_url)">First</button>
+              <button *ngIf="paginated_users_list.prev_page_url" type="button" class="btn btn-white" (click)="getPaginatedUser(paginated_users_list.prev_page_url)"><i class="fa fa-chevron-left"></i></button>
+              <button class="btn btn-white  active">{{paginated_users_list.current_page + ' / ' + paginated_users_list.last_page}}</button>
+              <button *ngIf="paginated_users_list.next_page_url" type="button" class="btn btn-white" (click)="getPaginatedUser(paginated_users_list.next_page_url)"><i class="fa fa-chevron-right"></i> </button>
+              <button *ngIf="paginated_users_list.last_page_url" type="button" class="btn btn-white" (click)="getPaginatedUser(paginated_users_list.last_page_url)">Last</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<ng-template #new_user_modal>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h2 class="modal-title">Register New User</h2>
+  </div>
+  <div class="modal-body animated fadeIn">
+    <form  (ngSubmit)="registerUser(); modalRef.hide()" #add="ngForm" role="form">
+      <div class="card">
+        <div class="card-content">
+          <div class="form-group"><label>Full Name</label>
+            <input type="text" placeholder="Enter full name"  class="form-control" [(ngModel)]="new_user.full_name" name="full_name" required ></div>
+          <div class="form-group"><label>Email</label>
+            <input type="email" placeholder="Enter email" class="form-control" [(ngModel)]="new_user.email" name="email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></div>
+          <div class="form-group"><label>Password</label>
+            <input type="password" placeholder="Password" class="form-control" [(ngModel)]="new_user.password" name="password" required></div>
+
+          <div class="form-group">
+            <label for="role_id">User Privelage</label>
+            <select class="form-control" id="role_id" [(ngModel)]="role_id" name="role_id">
+              <option  *ngFor="let roles of role" value="{{roles.id}}">{{roles.role_name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <br>
+            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" [disabled]="!add.valid" type="submit"><strong> Register</strong></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #update_user_modal>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h2 class="modal-title">Update User</h2>
+  </div>
+  <div class="modal-body animated fadeIn">
+    <form  (ngSubmit)="updateUser(); modalRef.hide()" #add="ngForm" role="form">
+      <div class="card">
+        <div class="card-content">
+          <div class="form-group"><label>Full Name</label>
+            <input type="text" placeholder="Enter full name"  class="form-control" [(ngModel)]="selected_user.full_name" name="full_name" required ></div>
+          <div class="form-group"><label>Email</label>
+            <input type="email" placeholder="Enter email" class="form-control" [(ngModel)]="selected_user.email" name="email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></div>
+          <div class="form-group">
+            <label for="role_id">User Privilege</label>
+            <select class="form-control" id="updated_role_id" [(ngModel)]="selected_user.role_id" name="updated_role_id">
+              <option  *ngFor="let roles of role" value="{{roles.id}}">{{roles.role_name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <br>
+            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong> Update User</strong></button>
+            <button (click)="deleteUser(); modalRef.hide()" class="btn btn-sm btn-default pull-left m-t-n-xs" type="button"><strong> Delete User</strong></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

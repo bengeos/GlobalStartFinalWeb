@@ -20,14 +20,14 @@ export const ROUTES:Routes = [
 
 
   // App views
-  // {
-  //   path: '',
-  //   component: BasicLayoutComponent,
-  //   children: [{
-  //     path: 'admin',
-  //     loadChildren: './admin-pages/admin-page.module#AdminPageModule'
-  //   }]
-  // },
+  {
+    path: '',
+    component: BasicLayoutComponent,
+    children: [{
+      path: 'admin',
+      loadChildren: './admin-pages/admin-page.module#AdminPageModule'
+    }]
+  },
   {
     path: '',
     component: BlankLayoutComponent,

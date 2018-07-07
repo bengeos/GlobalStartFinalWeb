@@ -17,6 +17,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import {HttpService} from "./services/http.service";
 import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ModalModule} from "ngx-bootstrap";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     FormsModule,
+    ModalModule.forRoot(),
     HttpModule,
+    HttpClientModule,
     DashboardsModule,
     LayoutsModule,
     AppviewsModule,
