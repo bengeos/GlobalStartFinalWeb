@@ -28,16 +28,25 @@ export class NewsService {
     this.http.sendCustomGetRequest(full_url + '&token=' + this.authService.getUserToken())
       .subscribe( data => { this.processGetPaginatedNews(data); });
   }
-  public addNews(news: News) {
+  public addNews(news: News,  images: File[]) {
     const token = this.authService.getUserToken();
     const new_header = new Headers();
-    return this.http.sendPostRequest('news?token=' + token, news, new_header);
+    const formData: FormData = new FormData();
+    if (images.length > 0) {
+      formData.append('image', images[0], images[0].name);
+    }
+    formData.append('title', '' + news.title);
+    formData.append('description', '' + news.description);
+
+    // console.log('SEnding request feed --- ', news.category.id + '');
+    return this.http.sendPostRequest('news?token=' + token, formData, new_header);
+
   }
   public updateNews( UpdatedNews: News) {
     console.log('update_news', UpdatedNews);
     const new_header = new Headers();
     const token = this.authService.getUserToken();
-    return this.http.sendPutRequest('news?token=' + token, UpdatedNews, new_header);
+    return this.http.sendPostRequest('news_update?token=' + token, UpdatedNews, new_header);
   }
   public deleteNews(news: News) {
     const token = this.authService.getUserToken();

@@ -1,4 +1,4 @@
-export class PaginatedNews {
+export class PaginatedTestimonies {
   public current_page: number;
   public first_page_url: string;
   public from: number;
@@ -10,7 +10,7 @@ export class PaginatedNews {
   public prev_page_url: string;
   public to: number;
   public total: number;
-  public data: News[];
+  public data: Testimony[];
 
   constructor() {
     this.current_page = null;
@@ -28,11 +28,12 @@ export class PaginatedNews {
   }
 }
 
-export class News {
+export class Testimony {
   public id: number;
-  public title: string;
+  public address:string;
   public type:string;
-  public description: string;
+  public title: string;
+  public body: string;
   public image: string;
   public created_at: string;
   public updated_at: string;
@@ -40,7 +41,8 @@ export class News {
   constructor() {
     this.title = '';
     this.type='';
-    this.description = '';
+    this.address='';
+    this.body = '';
     this.image = '';
     this.created_at = '';
     this.updated_at = '';

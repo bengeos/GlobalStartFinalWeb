@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 export class HttpService {
 
   private  rootURl = 'http://localhost/global_start/public/api/';
-
+  public mainURL = 'http://localhost/global_start/public/';
   constructor(private httpRequest: HttpClient) {
   }
 

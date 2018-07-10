@@ -2,6 +2,8 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {NewsService} from '../services/news.service';
 import {News,  PaginatedNews} from './news.objects';
 import {BsModalService, BsModalRef} from 'ngx-bootstrap';
+import {HttpService} from "../../services/http.service";
+import {NgForm} from "@angular/forms";
 
 
 @Component({
@@ -14,7 +16,11 @@ export class NewsComponent implements OnInit {
   public new_news = new News();
   public selected_news = new News();
   public modalRef: BsModalRef;
-  constructor(private newsService: NewsService, private modalService: BsModalService,) { }
+  public image_art: any;
+  public image_url = '';
+  constructor(private newsService: NewsService, private modalService: BsModalService, private httpService: HttpService) {
+    this.image_url = this.httpService.mainURL;
+  }
   ngOnInit() {
     this.updateNewsComponent();
     this.newsService.paginatedNews.subscribe(
@@ -30,9 +36,10 @@ export class NewsComponent implements OnInit {
   public updateNewsComponent() {
     this.newsService.getPaginatedNews();
   }
-  public onAddNews() {
-    this.newsService.addNews(this.new_news).subscribe(
-      data => { this.updateNewsComponent(); });
+  public onAddNews(form:NgForm) {
+    this.newsService.addNews(this.new_news,this.image_art).subscribe(
+      data => { this.updateNewsComponent();});
+    form.reset();
   }
   public onEditNews(news) {
     this.selected_news = news;
@@ -48,5 +55,9 @@ export class NewsComponent implements OnInit {
   public parseDate(date) {
     this.selected_news.updated_at = date;
     return date;
+  }
+
+  public onImageFileChange(event) {
+    this.image_art = event.target.files;
   }
 }

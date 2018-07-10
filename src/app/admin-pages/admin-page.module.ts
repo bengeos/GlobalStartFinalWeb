@@ -11,6 +11,8 @@ import {UserComponent} from "./user/user.component";
 import {HttpService} from "../services/http.service";
 import {UserService} from "./services/user.service";
 import {NewsService} from "./services/news.service";
+import {TestimoniesComponent} from "./Testimonies/testimonies.component";
+import {TestimoniesService} from "./services/testimonies.service";
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import {NewsService} from "./services/news.service";
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
   ],
-  declarations: [DashboardComponent, NewsComponent, UserComponent],
-  providers:[ HttpService, UserService, NewsService]
+  declarations: [DashboardComponent, NewsComponent, UserComponent, TestimoniesComponent],
+  providers:[ HttpService, UserService, NewsService, TestimoniesService]
 })
 export class AdminPageModule { }

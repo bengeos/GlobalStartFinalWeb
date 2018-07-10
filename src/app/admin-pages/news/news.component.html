@@ -1,9 +1,11 @@
+<script
+  src="../../../../../../Sample Project/orphan_identity_management_system_web/orphan_identity_management_system_web/src/app/admin-pages/orphan-child/child-pictures/child-pictures.component.ts"></script>
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>Ahadu News Board</h2>
+    <h2>Global Start News Board</h2>
     <ol class="breadcrumb">
       <li class="active">
-        <strong>Ahadu Daily News Management</strong>
+        <strong> Daily News Management</strong>
       </li>
     </ol>
   </div>
@@ -12,7 +14,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
   <a class="btn btn-primary btn-sm" (click)="openModal(new_news_modal)">Add New News</a>
-  <h2>Today News</h2>
+  <h2>News</h2>
   <hr>
   <div class="row">
     <div *ngFor="let news_item of paginated_news.data; let i = index" class="col-sm-4">
@@ -28,8 +30,12 @@
           </ul>
         </div>
         <a>
-          <h3><strong>{{news_item.title}}</strong></h3>
+          <h3><strong>{{news_item.title}}</strong><h4>({{news_item.type}})</h4></h3>
           <hr>
+
+          <div class="image">
+            <img  class="img-responsive"  src="{{image_url + news_item.image}}" alt="Image">
+          </div>
           <div>
 
             <br>
@@ -73,7 +79,7 @@
   <div class="modal-body animated fadeIn">
     <div class="card">
       <div class="card-content">
-        <form  (ngSubmit)="onAddNews(); modalRef.hide()" #add="ngForm">
+        <form  (ngSubmit)="onAddNews(); modalRef.hide()" #add="ngForm" method="post" enctype='multipart/form-data'>
           <div class="form-group">
             <label>Title</label>
             <input class="form-control" placeholder="News Title Here" type="text" [(ngModel)]="new_news.title" name="title">
@@ -84,7 +90,7 @@
           </div>
           <div class="form-group">
             <label>Image</label>
-            <input class="form-control" type="file" [(ngModel)]="new_news.image" name="image">
+            <input class="form-control" type="file"  (change)="onImageFileChange($event)" #fileinput name="image">
           </div>
           <div class="form-group">
             <br>
@@ -105,7 +111,7 @@
   <div class="modal-body animated fadeIn">
     <div class="card">
       <div class="card-content">
-        <form  (ngSubmit)="updateNews(); modalRef.hide()" #add="ngForm">
+        <form  (ngSubmit)="updateNews(); modalRef.hide()" #add="ngForm" method="post" enctype='multipart/form-data'>
 
           <div class="form-group">
             <label>Title</label>
@@ -118,10 +124,6 @@
           <div class="form-group">
             <label>News Body</label>
             <textarea class="form-control" placeholder="News Description Here" rows="5" [(ngModel)]="selected_news.description" name="description"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Image</label>
-            <input class="form-control" type="file" [(ngModel)]="selected_news.image" name="image">
           </div>
           <hr>
           <button class="btn btn-fill btn-primary" type="submit"> Update News</button>
