@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit {
     this.authService.AuthenticatedUserEmitter.subscribe(
       data => {
         if (data) {
-          this.routeManager.navigate(['/admin/dashboard']);
+          this.routeManager.navigate(['/admin/news']);
         }
         this.loading = false;
       }

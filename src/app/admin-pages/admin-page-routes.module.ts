@@ -6,13 +6,13 @@ import {NewsComponent} from "./news/news.component";
 import {UserComponent} from "./user/user.component";
 import {TestimoniesComponent} from "./Testimonies/testimonies.component";
 export const AdminPageRoutes: Routes = [
-  {
-    path: '',
-    children: [{
-      path: 'dashboard',
-      component: DashboardComponent,
-    }]
-  },
+  // {
+  //   path: '',
+  //   children: [{
+  //     path: 'dashboard',
+  //     component: DashboardComponent,
+  //   }]
+  // },
   {
     path: '',
     children: [{

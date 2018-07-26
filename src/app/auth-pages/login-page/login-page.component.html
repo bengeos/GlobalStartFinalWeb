@@ -2,9 +2,9 @@
   <div>
     <div>
       <!--<h2 class="logo-name">AHD</h2>-->
-      <img alt="image" class="img-rounded" src="assets/images/ahadu.png">
+      <img alt="image" class="img-rounded" src="assets/images/Global.png">
     </div>
-    <h3>Welcome to AHADU NEWS BOARD</h3>
+    <h3>Welcome to Global Start</h3>
     <form (ngSubmit)="loginUser()"  class="m-t" role="form" action="#">
       <div class="form-group">
         <input type="email" class="form-control" #em="ngModel" placeholder="Email"  name="email" [(ngModel)]="new_login_user.email"  pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
@@ -13,9 +13,6 @@
         <input type="password" class="form-control" #pass="ngModel" placeholder="Password"  name="password"   [(ngModel)]="new_login_user.password" ngModel required>
       </div>
       <button type="submit"   class="btn btn-primary block full-width m-b">Login</button>
-      <a> <small>Forgot password?</small></a>
-      <p class="text-muted text-center"><small>Do not have an account?</small></p>
-      <a class="btn btn-sm btn-white btn-block" [routerLink]="['/auth/register']">Create an account</a>
     </form>
     <p class="m-t"> <small>AGELGEL TECHNOLOGIES &copy; 2018</small> </p>
   </div>
