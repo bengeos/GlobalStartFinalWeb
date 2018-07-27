@@ -2,19 +2,8 @@
   <div class="sidebar-collapse">
     <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
-        <div class="profile-element" dropdown>
-          <img alt="Global Start" class="img-circle" >
-          <a dropdownToggle>
-            <span class="block m-t-xs"> <strong class="font-bold">Setting</strong> </span>
-            <span class="text-muted text-xs block">Settings <b class="caret"></b> </span>
-          </a>
-          <ul class="animated fadeInRight dropdown-menu" *dropdownMenu>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">Mailbox</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
+        <div clivs="profile-element" dropdown>
+          <a><strong><h3>Global Start</h3></strong></a>
         </div>
         <div class="logo-element">
           Global Start
@@ -29,11 +18,12 @@
       <li [ngClass]="{active: activeRoute('/admin/news')}">
         <a [routerLink]="['/admin/news']"><i class="fa fa-newspaper-o"></i> <span class="nav-label">News</span></a>
       </li>
-      <li [ngClass]="{active: activeRoute('/admin/user')}">
-        <a [routerLink]="['/admin/user']"><i class="fa fa-th-large"></i> <span class="nav-label">Users</span></a>
-      </li>
+
       <li [ngClass]="{active: activeRoute('/admin/Testimonies')}">
         <a [routerLink]="['/admin/Testimonies']"><i class="fa fa-th-large"></i> <span class="nav-label">Testimonies</span></a>
+      </li>
+      <li [ngClass]="{active: activeRoute('/admin/user')}">
+        <a [routerLink]="['/admin/user']"><i class="fa fa-th-large"></i> <span class="nav-label">Users</span></a>
       </li>
 
     </ul>
