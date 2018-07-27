@@ -10,7 +10,6 @@ declare var jQuery:any;
 })
 
 export class NavigationComponent {
-
   constructor(private router: Router) {}
 
   ngAfterViewInit() {
@@ -26,6 +25,7 @@ export class NavigationComponent {
   activeRoute(routename: string): boolean{
     return this.router.url.indexOf(routename) > -1;
   }
+
 
 
 }
