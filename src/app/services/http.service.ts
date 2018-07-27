@@ -7,7 +7,9 @@ export class HttpService {
   // private  rootURl = 'http://localhost/global_start/public/api/'; // Samy`s Server
   // private  rootURl = 'http://127.0.0.1:8000/api/'; // Bengeos`s Server
   private  rootURl = 'http://api.globalstart.agelgel.net/api/'; // Production`s Server
-  public mainURL = 'http://localhost/global_start/public/';
+
+  // public mainURL = 'http://localhost/global_start/public/'; // Local Server
+  public mainURL = 'http://api.globalstart.agelgel.net/public/'; // Production Server
   constructor(private httpRequest: HttpClient) {
   }
 
